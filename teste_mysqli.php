@@ -1,29 +1,33 @@
 <?php
+
     require_once('db.class.php');
 
-    $sql = "Select usuario, email From usuarios";
+    $sql = "SELECT * FROM usuarios WHERE id = 7";
 
-    $objetoDb = new db();
-    $link = $objetoDb-> conecta_mysql();
+    $objDb = new db();
+    $link = $objDb->conecta_mysql();
 
     $resultado_id = mysqli_query($link, $sql);
 
     if($resultado_id){
-        //add infos of the user in array $dados_usuario
-        //MYSQL_NUM- numerical form
-        //MYSQL_ASSOC - associative form
-        //MYSQL_BOTH - hybrid arrays
+
         $dados_usuario = array();
-        
-        while($linha = mysqli_fetch_array($resultado_id, MYSQLI_NUM)){
+
+        while($linha = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
+
             $dados_usuario[] = $linha;
+
         }
 
         foreach($dados_usuario as $usuario){
-            var_dump($usuario);
-            echo '<br/>';
+            echo $usuario['email'];
+            echo "<br /><br />";
         }
+
+    }else{
+        
+        echo "Erro na execução da consulta, favor entrar em contato com o admin do site";
+
     }
-    else
-        echo 'Erro na execução da consulta, favor entrar em contato com o admin do site!';
+
 ?>
