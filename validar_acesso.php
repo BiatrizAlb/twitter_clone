@@ -5,7 +5,7 @@
     require_once('db.class.php');
 
     $usuario = $_POST['usuario'];
-    $senha = $_POST['senha'];
+    $senha = md5($_POST['senha']);
 
     $sql = "Select usuario, email From usuarios Where usuario = '$usuario' and senha = '$senha'";
 
